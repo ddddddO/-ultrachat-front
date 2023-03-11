@@ -5,12 +5,12 @@
   - WSL環境でコード編集・実行
 
 # Usage
-- GraphQL server起動
+1. GraphQL server起動
     ```console
     $ go run server.go
     ```
 
-- ブラウザ1で、`http://localhost:8080/` 接続し、以下を入力し実行
+1. ブラウザ1で、`http://localhost:8080/` 接続し、以下を入力し実行
     ```json
     subscription {
         messageSent {
@@ -21,7 +21,7 @@
     }
     ```
 
-- ブラウザ2で、``http://localhost:8080/` 接続し、以下を入力し実行`
+1. ブラウザ2で、``http://localhost:8080/` 接続し、以下を入力し実行`
 
     ```json
     mutation($text: String!) {
@@ -39,7 +39,7 @@
         "text": "Hellwww!!!!!"
     }
     ```
-- ブラウザ1に、2で入力したメッセージが表示される
+1. ブラウザ1に、2で入力したメッセージが表示される
 
 # ref
 - GraphQL/gplgen/subscribe(local動作確認用)
