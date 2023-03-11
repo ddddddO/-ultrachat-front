@@ -4,9 +4,13 @@ import { StyleSheet, Text, View, SafeAreaView, TextInput, Button, Alert } from '
 
 export default function App() {
   const [text, onChangeText] = React.useState('Please input text here!!!');
+  const [response, setResponse] = React.useState('');
 
   const handleSubmit = () => {
     Alert.alert('Send text!:', text);
+
+    let res = response + '\n' + text + 'by server';
+    setResponse(res);
   }
 
   return (
@@ -24,6 +28,9 @@ export default function App() {
           onPress={handleSubmit}
         />
       </SafeAreaView>
+      <Text>
+        {response}
+      </Text>
     </View>
   );
 }
