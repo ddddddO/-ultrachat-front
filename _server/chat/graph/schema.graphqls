@@ -1,0 +1,19 @@
+# Copied from https://github.com/sanoyo/ultrachat/blob/main/schema/schema.graphqls
+
+type Query {
+  getChatMessages: [ChatMessage!]!
+}
+
+type Mutation {
+  sendMessage(message: String!): ChatMessage!
+}
+
+type Subscription {
+  messageSent: ChatMessage!
+}
+
+type ChatMessage {
+  id: ID!
+  message: String!
+  createdAt: String!
+}
