@@ -1,9 +1,8 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView, TextInput, Button, Alert } from 'react-native';
 
 export default function App() {
-  const [text, onChangeText] = React.useState('Please input text here!!!');
+  const [text, handleText] = React.useState('');
   const [response, setResponse] = React.useState('');
 
   // https://qiita.com/_ytori/items/a92d69760e8e8a2047ac が実用的そう
@@ -58,23 +57,29 @@ export default function App() {
       "mode": "cors",
       "credentials": "omit"
     });
+
+    handleText('');
   }
 
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!!!!</Text>
+      <Text>UltraChat📢</Text>
+      <Separator />
       <SafeAreaView>
         <TextInput
           style={styles.input}
-          onChangeText={onChangeText}
+          onChangeText={handleText}
+          placeholder="entry message..."
           value={text}
         />
+        <Separator />
         <Button
           title="POST!"
           color="#f194ff"
           onPress={handleSubmit}
         />
       </SafeAreaView>
+      <Separator />
       <Text>
         {response}
       </Text>
@@ -82,11 +87,18 @@ export default function App() {
   );
 }
 
+const Separator = () => <View style={styles.separator} />;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  separator: {
+    marginVertical: 8,
+    borderBottomColor: '#737373',
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
 });
