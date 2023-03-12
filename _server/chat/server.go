@@ -11,7 +11,9 @@ import (
 	"github.com/99designs/gqlgen/graphql/handler/transport"
 	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/ddddddO/ultrachat-front/_server/chat/graph"
+	"github.com/go-chi/chi"
 	"github.com/gorilla/websocket"
+	"github.com/rs/cors"
 )
 
 const defaultPort = "8080"
@@ -22,6 +24,14 @@ func main() {
 	if port == "" {
 		port = defaultPort
 	}
+
+	router := chi.NewRouter()
+
+	router.Use(cors.New(cors.Options{
+		AllowedOrigins:   []string{"http://localhost:19006"},
+		AllowCredentials: true,
+		Debug:            true,
+	}).Handler)
 
 	srv := handler.New(
 		graph.NewExecutableSchema(graph.Config{Resolvers: graph.NewResolver()}),
@@ -49,9 +59,9 @@ func main() {
 		Cache: lru.New(100),
 	})
 
-	http.Handle("/", playground.Handler("GraphQL playground", "/query"))
-	http.Handle("/query", srv)
+	router.Handle("/", playground.Handler("GraphQL playground", "/query"))
+	router.Handle("/query", srv)
 
 	log.Printf("connect to http://localhost:%s/ for GraphQL playground", port)
-	log.Fatal(http.ListenAndServe(":"+port, nil))
+	log.Fatal(http.ListenAndServe(":"+port, router))
 }
