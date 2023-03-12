@@ -3,6 +3,7 @@
 - GraphQLのスキーマは、[こちら](https://github.com/sanoyo/ultrachat/tree/main/schema)を使用
 - serverコードの生成は、[gqlgen](https://github.com/99designs/gqlgen)を利用
   - WSL環境でコード編集・実行
+- [作業風景](https://twitter.com/ddddddOpppppp/status/1634580995457560577?s=20)
 
 # Usage
 1. GraphQL server起動
