@@ -12,7 +12,7 @@ export default function App() {
       console.log('この時点でWebSocketのコネクションは確立.以下で、GraphQL側とのハンドシェイク開始');
       websocket.send('{"type":"connection_init","payload":{}}');
   
-      websocket.onmessage = function (event) {
+      websocket.onmessage = (event) => {
         console.log('GraphQL側からackを受けとる');
         const connectionAck = JSON.parse(event.data);
         if (connectionAck && connectionAck.type === 'connection_ack') {
